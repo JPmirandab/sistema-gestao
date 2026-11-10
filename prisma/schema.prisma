@@ -11,3 +11,19 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum Papel {
+  ADMINISTRADOR
+  VENDEDOR
+}
+
+model Usuario {
+  id           Int      @id @default(autoincrement())
+  nome         String
+  email        String   @unique
+  senhaHash    String
+  celular      String?
+  papel        Papel    @default(VENDEDOR)
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+}
